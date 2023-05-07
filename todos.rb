@@ -60,7 +60,11 @@ while action != 'exit'
     puts "\n"
     list_todos(todos)
     print_menu
-  when 'completed' then 'show todos completed'
+  when 'completed'
+    puts "\n"
+    list_todos(todos, completed = true)
+    print_menu
+    
   when 'toggle'
     print 'todo ID(s): '
     ids = gets.chomp.split(',').map{ |id| id.to_i}
