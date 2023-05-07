@@ -25,6 +25,11 @@ def print_menu
   puts array_menu.join(' | ')
 end
 
+def add_todo(new_content, id, todos)
+  new_todo = { id: id, content: new_content, completed: false }
+  todos << new_todo
+end
+
 # main
 welcome()
 list_todos(todos)
@@ -37,8 +42,16 @@ while action != 'exit'
   action = gets.chomp.strip
 
   case action
-  when 'add' then 'Action add'
-  when 'list' then 'show list'
+  when 'add'
+    print 'content: '
+    new_content = gets.chomp.strip
+    id =id.next
+    add_todo(new_content, id, todos)
+    print_menu
+
+  when 'list'
+    list_todos(todos)
+    print_menu
   when 'completed' then 'show todos completed'
   when 'toggle' then 'Action toggle'
   when 'delete' then 'Action delete'
