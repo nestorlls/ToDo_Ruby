@@ -19,6 +19,13 @@ def list_todos(todos)
   end
 end
 
+def print_menu
+  array_menu = %w[add list completed toggle delete exit]
+  puts '-' * 64
+  puts array_menu.join(' | ')
+end
+
 # main
 welcome()
 list_todos(todos)
+print_menu()
