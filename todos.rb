@@ -29,3 +29,20 @@ end
 welcome()
 list_todos(todos)
 print_menu()
+
+action = nil
+while action != 'exit'
+  puts "\n"
+  print 'action: '
+  action = gets.chomp.strip
+
+  case action
+  when 'add' then 'Action add'
+  when 'list' then 'show list'
+  when 'completed' then 'show todos completed'
+  when 'toggle' then 'Action toggle'
+  when 'delete' then 'Action delete'
+  end
+end
+
+puts 'Thanks for using toDOS!'
