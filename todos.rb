@@ -37,6 +37,10 @@ def toggle_todo(ids, todos)
   end
 end
 
+def delete_todo(id, todos)
+  todos.delete_if { |todo| todo[:id] == id }
+end
+
 # main
 welcome()
 list_todos(todos)
@@ -64,12 +68,16 @@ while action != 'exit'
     puts "\n"
     list_todos(todos, completed = true)
     print_menu
-    
+
   when 'toggle'
     print 'todo ID(s): '
     ids = gets.chomp.split(',').map{ |id| id.to_i}
     toggle_todo(ids, todos)
-  when 'delete' then 'Action delete'
+  when 'delete'
+    print 'todo ID: '
+    id = gets.chomp.to_i
+    delete_todo(id, todos)
+    print_menu
   end
 end
 
