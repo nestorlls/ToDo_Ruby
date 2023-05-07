@@ -13,9 +13,9 @@ def welcome
   puts "#{'-' * 24} Welcome to ToDos #{'-' * 24} \n\n"
 end
 
-def list_todos(todos)
+def list_todos(todos, completed = false)
   todos.each do |todo|
-    puts "#{todo[:id]}. #{todo[:content]}"
+    puts "#{todo[:id]}. #{todo[:content]}" if todo[:completed] == completed
   end
 end
 
@@ -28,6 +28,13 @@ end
 def add_todo(new_content, id, todos)
   new_todo = { id: id, content: new_content, completed: false }
   todos << new_todo
+end
+
+def toggle_todo(ids, todos)
+  ids.each do |id|
+    todo_found = todos.find { |todo| todo[:id] == id }
+    todo_found[:completed] = !todo_found[:completed] if todo_found
+  end
 end
 
 # main
@@ -50,10 +57,14 @@ while action != 'exit'
     print_menu
 
   when 'list'
+    puts "\n"
     list_todos(todos)
     print_menu
   when 'completed' then 'show todos completed'
-  when 'toggle' then 'Action toggle'
+  when 'toggle'
+    print 'todo ID(s): '
+    ids = gets.chomp.split(',').map{ |id| id.to_i}
+    toggle_todo(ids, todos)
   when 'delete' then 'Action delete'
   end
 end
